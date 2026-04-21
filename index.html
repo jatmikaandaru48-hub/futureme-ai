@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FutureMe AI</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+background: radial-gradient(circle at top,#0f172a,#020617);
+color:white;
+}
+
+.header{text-align:center;padding:40px;}
+.header h1{font-size:42px;color:#38bdf8;}
+
+.container{
+max-width:500px;
+margin:auto;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(20px);
+border-radius:20px;
+padding:25px;
+box-shadow:0 0 40px rgba(56,189,248,0.2);
+}
+
+input,select{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:10px;
+border:none;
+}
+
+button{
+width:100%;
+margin-top:15px;
+padding:12px;
+border:none;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+background:linear-gradient(90deg,#38bdf8,#0ea5e9);
+}
+
+#loadingBar{
+height:4px;
+width:0%;
+background:#38bdf8;
+margin-top:10px;
+transition:1.5s;
+}
+
+.result{
+margin-top:20px;
+padding:20px;
+background:#1e293b;
+border-radius:15px;
+display:none;
+}
+
+.presentasi{
+margin-top:20px;
+padding:20px;
+background:#0f172a;
+border-radius:15px;
+display:none;
+}
+
+img{
+width:100%;
+border-radius:12px;
+margin-top:15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<h1>🚀 FutureMe AI</h1>
+<p>Simulasi Masa Depan dengan Kecerdasan Buatan</p>
+</div>
+
+<div class="container">
+
+<input type="text" id="nama" placeholder="Nama kamu">
+
+<select id="minat">
+<option value="">Pilih minat</option>
+<option value="teknologi">Teknologi</option>
+<option value="seni">Seni & Kreatif</option>
+<option value="bisnis">Bisnis & Entrepreneur</option>
+<option value="kesehatan">Kesehatan</option>
+<option value="pendidikan">Pendidikan</option>
+<option value="hukum">Hukum</option>
+<option value="gaming">Game Developer / Esports</option>
+<option value="content">Content Creator</option>
+<option value="musik">Musisi</option>
+<option value="olahraga">Atlet</option>
+<option value="psikologi">Psikologi</option>
+<option value="pariwisata">Pariwisata</option>
+</select>
+
+<button onclick="generateFuture()">🔮 Analisis Masa Depan</button>
+
+<div id="loadingBar"></div>
+
+<div class="result" id="output"></div>
+
+<button onclick="downloadResult()">📄 Download Hasil</button>
+
+<div class="presentasi" id="presentasi">
+<h3>🎤 Tentang FutureMe AI</h3>
+<p id="presentasiText"></p>
+</div>
+
+</div>
+
+<script>
+async function generateFuture(){
+let nama=document.getElementById("nama").value;
+let minat=document.getElementById("minat").value;
+let output=document.getElementById("output");
+let bar=document.getElementById("loadingBar");
+
+if(nama===""||minat===""){
+alert("Isi dulu semua!");
+return;
+}
+
+output.style.display="block";
+output.innerHTML="🤖 AI sedang membaca potensimu...";
+bar.style.width="100%";
+
+await new Promise(r=>setTimeout(r,2000));
+bar.style.width="0%";
+
+// PROFESI DASAR
+let profesi="";
+switch(minat){
+case "teknologi": profesi="AI Engineer"; break;
+case "seni": profesi="Creative Director"; break;
+case "bisnis": profesi="Startup Founder"; break;
+case "kesehatan": profesi="Dokter Profesional"; break;
+case "pendidikan": profesi="Pendidik Inspiratif"; break;
+case "hukum": profesi="Pengacara Sukses"; break;
+case "gaming": profesi="Game Developer / Pro Player"; break;
+case "content": profesi="Content Creator Besar"; break;
+case "musik": profesi="Musisi Terkenal"; break;
+case "olahraga": profesi="Atlet Profesional"; break;
+case "psikologi": profesi="Psikolog Hebat"; break;
+case "pariwisata": profesi="Travel Expert"; break;
+default: profesi="individu sukses";
+}
+
+// TEKS MOTIVASI PANJANG (FINAL BOSS)
+let hasil = `${nama}, berdasarkan analisis FutureMe AI...
+
+Kamu memiliki potensi kuat untuk menjadi seorang ${profesi} di masa depan.
+
+Perjalananmu tidak akan selalu mudah. Akan ada fase di mana kamu merasa ragu, lelah, bahkan ingin menyerah. Tapi justru di titik itulah kamu sedang berkembang.
+
+Di usia 20-an, kamu mulai menemukan arah hidupmu. Kamu belajar dari kegagalan, memperbaiki diri, dan terus mencoba.
+
+Di usia 25 tahun, kamu mulai dikenal karena kerja keras dan konsistensimu.
+
+Di usia 30 tahun, kamu tidak hanya sukses secara karier, tapi juga menjadi seseorang yang menginspirasi orang lain.
+
+Yang membuatmu berbeda bukan hanya bakatmu, tapi keberanianmu untuk terus maju saat orang lain berhenti.
+
+Ingat, masa depan cerah bukan sesuatu yang ditunggu — tapi sesuatu yang kamu bangun dari sekarang.
+
+Terus belajar. Terus berkembang. Dan jangan pernah meremehkan potensi dirimu sendiri.`;
+
+// RANDOM EXTRA MOTIVASI
+let extra=[
+"Setiap langkah kecil hari ini menentukan versi terbaik dirimu di masa depan.",
+"Kamu lebih dekat ke kesuksesan daripada yang kamu pikirkan.",
+"Percaya pada prosesmu, karena itu yang membentuk masa depanmu."
+];
+
+hasil+="\n\n"+extra[Math.floor(Math.random()*extra.length)];
+
+let keyword=minat+",success,future";
+
+output.innerHTML=`
+<h2>✨ Future Simulation Result</h2>
+<p id="text"></p>
+<img src="https://source.unsplash.com/400x250/?${keyword}">
+`;
+
+typeEffect(hasil,"text");
+
+// suara
+let speech=new SpeechSynthesisUtterance(hasil);
+speech.lang="id-ID";
+speech.rate=0.95;
+speechSynthesis.speak(speech);
+
+// tampilkan presentasi
+showPresentation();
+}
+
+function typeEffect(text,id){
+let i=0;
+let el=document.getElementById(id);
+el.innerHTML="";
+(function typing(){
+if(i<text.length){
+el.innerHTML+=text.charAt(i);
+i++;
+setTimeout(typing,20);
+}
+})();
+}
+
+function downloadResult(){
+let text=document.getElementById("text")?.innerText||"Belum ada hasil";
+let blob=new Blob([text],{type:"text/plain"});
+let a=document.createElement("a");
+a.href=URL.createObjectURL(blob);
+a.download="futureme.txt";
+a.click();
+}
+
+function showPresentation(){
+let text=`FutureMe AI adalah platform berbasis kecerdasan buatan yang membantu pelajar memahami potensi masa depan mereka secara lebih mendalam.
+
+Dengan menggabungkan analisis minat, visualisasi, suara, dan pengalaman interaktif, pengguna dapat merasakan simulasi masa depan yang realistis dan memotivasi.
+
+Platform ini dirancang untuk mengurangi kebingungan pelajar dalam menentukan arah hidup serta membangun kepercayaan diri mereka dalam meraih masa depan yang lebih cerah.`;
+
+let el=document.getElementById("presentasi");
+let target=document.getElementById("presentasiText");
+
+el.style.display="block";
+target.innerHTML="";
+
+let i=0;
+(function typing(){
+if(i<text.length){
+target.innerHTML+=text.charAt(i);
+i++;
+setTimeout(typing,20);
+}
+})();
+}
+</script>
+
+</body>
+</html>
