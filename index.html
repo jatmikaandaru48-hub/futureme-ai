@@ -192,13 +192,15 @@ pariwisata:"Travel Expert"
 
 let hasil=`${nama}, masa depanmu sebagai ${profesi} sangat cerah.
 
-Perjalananmu mungkin penuh tantangan, tapi justru itu yang akan membentukmu menjadi pribadi yang kuat.
+Perjalananmu mungkin penuh tantangan, tapi setiap proses akan membentuk dirimu menjadi pribadi yang kuat.
 
-Di usia 20-an kamu belajar.
+Di usia 20-an kamu belajar dan berkembang.
 Di usia 25 kamu mulai dikenal.
-Di usia 30 kamu sukses.
+Di usia 30 kamu mencapai kesuksesan.
 
-Jangan berhenti berkembang. Masa depan dimulai dari hari ini.`;
+Kunci keberhasilanmu adalah konsistensi, keberanian, dan kepercayaan diri.
+
+Jangan pernah menyerah, karena masa depanmu sedang kamu bangun dari hari ini.`;
 
 // OUTPUT
 output.innerHTML=`
@@ -232,73 +234,36 @@ setTimeout(t,20);
 })();
 }
 
-// 🔥 SLIDESHOW (SUDAH DIGANTI PUNYAMU)
+// SLIDESHOW SESUAI PROFESI
 function startSlideshow(key){
 
 let data = {
 
+teknologi: [
+"https://images.unsplash.com/photo-1515879218367-8466d910aaa4",
+"https://images.unsplash.com/photo-1555949963-aa79dcee981c",
+"https://images.unsplash.com/photo-1581090700227-4c4f50c0e8c4"
+],
+
+bisnis: [
+"https://images.unsplash.com/photo-1556740738-b6a63e27c4df",
+"https://images.unsplash.com/photo-1507679799987-c73779587ccf",
+"https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
+],
+
 seni: [
 "https://images.unsplash.com/photo-1504198458649-3128b932f49b",
-"https://images.unsplash.com/photo-1492724441997-5dc865305da7",
-"https://images.unsplash.com/photo-1529101091764-c3526daf38fe",
-"https://images.unsplash.com/photo-1517694712202-14dd9538aa97",
-"https://images.unsplash.com/photo-1547891654-e66ed7ebb968"
+"https://images.unsplash.com/photo-1529101091764-c3526daf38fe"
 ],
 
 kesehatan: [
 "https://images.unsplash.com/photo-1580281657527-47c82f4b79f3",
-"https://images.unsplash.com/photo-1584515933487-779824d29309",
-"https://images.unsplash.com/photo-1576765608535-5f04d1e3f289",
-"https://images.unsplash.com/photo-1530026186672-2cd00ffc50fe",
-"https://images.unsplash.com/photo-1586773860418-d37222d8fce3"
+"https://images.unsplash.com/photo-1584515933487-779824d29309"
 ],
 
 gaming: [
 "https://images.unsplash.com/photo-1511512578047-dfb367046420",
-"https://images.unsplash.com/photo-1587202372775-989c4b2b83b3",
-"https://images.unsplash.com/photo-1611605698335-8b1569810432",
-"https://images.unsplash.com/photo-1605902711622-cfb43c44367f",
-"https://images.unsplash.com/photo-1627856013091-fed6e4e30025"
-],
-
-content: [
-"https://images.unsplash.com/photo-1504384308090-c894fdcc538d",
-"https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
-"https://images.unsplash.com/photo-1498050108023-c5249f4df085",
-"https://images.unsplash.com/photo-1581092335397-9583eb92d232",
-"https://images.unsplash.com/photo-1600880292203-757bb62b4baf"
-],
-
-musik: [
-"https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4",
-"https://images.unsplash.com/photo-1507838153414-b4b713384a76",
-"https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f",
-"https://images.unsplash.com/photo-1511379938547-c1f69419868d",
-"https://images.unsplash.com/photo-1513883049090-d0b7439799bf"
-],
-
-olahraga: [
-"https://images.unsplash.com/photo-1517649763962-0c623066013b",
-"https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf",
-"https://images.unsplash.com/photo-1471295253337-3ceaaedca402",
-"https://images.unsplash.com/photo-1521412644187-c49fa049e84d",
-"https://images.unsplash.com/photo-1517836357463-d25dfeac3438"
-],
-
-psikologi: [
-"https://images.unsplash.com/photo-1551847677-dc82d764e1eb",
-"https://images.unsplash.com/photo-1584697964403-9e59e3c49df3",
-"https://images.unsplash.com/photo-1573497161161-cbd3cc7b74d2",
-"https://images.unsplash.com/photo-1527689368864-3a821dbccc34",
-"https://images.unsplash.com/photo-1588776814546-ec7e9c6b8b6f"
-],
-
-pariwisata: [
-"https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
-"https://images.unsplash.com/photo-1493558103817-58b2924bce98",
-"https://images.unsplash.com/photo-1501785888041-af3ef285b470",
-"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
-"https://images.unsplash.com/photo-1502920917128-1aa500764ce7"
+"https://images.unsplash.com/photo-1587202372775-989c4b2b83b3"
 ],
 
 default: [
@@ -308,21 +273,20 @@ default: [
 
 };
 
-let imgs = data[key] || data.default;
-let img = document.getElementById("img1");
-let i = 0;
+let imgs=data[key]||data.default;
+let img=document.getElementById("img1");
+let i=0;
 
 function show(){
-img.style.opacity = 0;
+img.style.opacity=0;
 setTimeout(()=>{
-img.src = imgs[i];
-img.style.opacity = 1;
-i = (i + 1) % imgs.length;
-}, 400);
+img.src=imgs[i];
+img.style.opacity=1;
+i=(i+1)%imgs.length;
+},300);
 }
-
 show();
-setInterval(show, 2500);
+setInterval(show,2500);
 }
 
 // DOWNLOAD
@@ -337,7 +301,7 @@ a.click();
 
 // PRESENTASI
 function showPresentation(){
-let text=`FutureMe AI membantu pelajar memahami masa depan mereka melalui pengalaman interaktif dan motivatif.`;
+let text=`FutureMe AI membantu pelajar memahami masa depan mereka dengan cara interaktif dan memotivasi.`;
 
 let el=document.getElementById("presentasi");
 let target=document.getElementById("presentasiText");
