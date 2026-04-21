@@ -239,6 +239,7 @@ setTimeout(t,20);
 
 // SLIDESHOW SUPER VARIATIF
 function startSlideshow(key){
+
 let data = {
 
 seni: [
@@ -330,18 +331,6 @@ i = (i + 1) % imgs.length;
 show();
 setInterval(show, 2500);
 }
-function show(){
-img.style.opacity=0;
-setTimeout(()=>{
-img.src=imgs[i];
-img.style.opacity=1;
-i=(i+1)%imgs.length;
-},400);
-}
-
-show();
-setInterval(show,2500);
-}
 
 // DOWNLOAD
 function downloadResult(){
@@ -355,8 +344,7 @@ a.click();
 
 // PRESENTASI
 function showPresentation(){
-let text=`FutureMe AI membantu pelajar memahami masa depan mereka melalui pengalaman interaktif, visual, dan motivatif sehingga mereka lebih percaya diri menentukan arah hidup. “FutureMe AI adalah website interaktif yang menggunakan konsep kecerdasan buatan untuk mensimulasikan masa depan seseorang berdasarkan minatnya.
-Pengguna cukup memasukkan nama dan memilih bidang yang mereka sukai, lalu sistem akan menampilkan gambaran masa depan mereka secara visual dan naratif.”.`;
+let text=`FutureMe AI membantu pelajar memahami masa depan mereka melalui pengalaman interaktif, visual, dan motivatif sehingga mereka lebih percaya diri menentukan arah hidup.`;
 
 let el=document.getElementById("presentasi");
 let target=document.getElementById("presentasiText");
