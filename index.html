@@ -13,11 +13,22 @@
 body{
 background: radial-gradient(circle at top,#0f172a,#020617);
 color:white;
+overflow-x:hidden;
 }
 
+/* PARTICLE */
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+}
+
+/* HEADER */
 .header{text-align:center;padding:40px;}
 .header h1{font-size:42px;color:#38bdf8;}
 
+/* CONTAINER */
 .container{
 max-width:500px;
 margin:auto;
@@ -28,6 +39,7 @@ padding:25px;
 box-shadow:0 0 40px rgba(56,189,248,0.2);
 }
 
+/* INPUT */
 input,select{
 width:100%;
 padding:12px;
@@ -36,6 +48,7 @@ border-radius:10px;
 border:none;
 }
 
+/* BUTTON */
 button{
 width:100%;
 margin-top:15px;
@@ -47,6 +60,7 @@ cursor:pointer;
 background:linear-gradient(90deg,#38bdf8,#0ea5e9);
 }
 
+/* LOADING */
 #loadingBar{
 height:4px;
 width:0%;
@@ -55,6 +69,7 @@ margin-top:10px;
 transition:1.5s;
 }
 
+/* RESULT */
 .result{
 margin-top:20px;
 padding:20px;
@@ -63,6 +78,16 @@ border-radius:15px;
 display:none;
 }
 
+/* IMAGE */
+.slideshow img{
+width:100%;
+border-radius:12px;
+margin-top:15px;
+opacity:0;
+transition:0.8s;
+}
+
+/* PRESENTASI */
 .presentasi{
 margin-top:20px;
 padding:20px;
@@ -70,20 +95,16 @@ background:#0f172a;
 border-radius:15px;
 display:none;
 }
-
-img{
-width:100%;
-border-radius:12px;
-margin-top:15px;
-}
 </style>
 </head>
 
 <body>
 
+<canvas id="bg"></canvas>
+
 <div class="header">
 <h1>🚀 FutureMe AI</h1>
-<p>Simulasi Masa Depan dengan Kecerdasan Buatan</p>
+<p>Simulasi Masa Depan dengan AI</p>
 </div>
 
 <div class="container">
@@ -93,15 +114,15 @@ margin-top:15px;
 <select id="minat">
 <option value="">Pilih minat</option>
 <option value="teknologi">Teknologi</option>
-<option value="seni">Seni & Kreatif</option>
-<option value="bisnis">Bisnis & Entrepreneur</option>
+<option value="seni">Seni</option>
+<option value="bisnis">Bisnis</option>
 <option value="kesehatan">Kesehatan</option>
 <option value="pendidikan">Pendidikan</option>
 <option value="hukum">Hukum</option>
-<option value="gaming">Game Developer / Esports</option>
+<option value="gaming">Gaming</option>
 <option value="content">Content Creator</option>
-<option value="musik">Musisi</option>
-<option value="olahraga">Atlet</option>
+<option value="musik">Musik</option>
+<option value="olahraga">Olahraga</option>
 <option value="psikologi">Psikologi</option>
 <option value="pariwisata">Pariwisata</option>
 </select>
@@ -122,131 +143,167 @@ margin-top:15px;
 </div>
 
 <script>
+// PARTICLE BACKGROUND
+const canvas=document.getElementById("bg");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+for(let i=0;i<70;i++){
+particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2});
+}
+
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+particles.forEach(p=>{
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fillStyle="#38bdf8";
+ctx.fill();
+p.y+=0.2;
+if(p.y>canvas.height)p.y=0;
+});
+requestAnimationFrame(animate);
+}
+animate();
+
+// MAIN
 async function generateFuture(){
 let nama=document.getElementById("nama").value;
 let minat=document.getElementById("minat").value;
 let output=document.getElementById("output");
 let bar=document.getElementById("loadingBar");
 
-if(nama===""||minat===""){
-alert("Isi dulu semua!");
-return;
-}
+if(!nama||!minat){alert("Isi dulu!");return;}
 
 output.style.display="block";
-output.innerHTML="🤖 AI sedang membaca potensimu...";
+output.innerHTML="🤖 AI sedang membaca masa depanmu...";
 bar.style.width="100%";
 
 await new Promise(r=>setTimeout(r,2000));
 bar.style.width="0%";
 
-// PROFESI DASAR
-let profesi="";
-switch(minat){
-case "teknologi": profesi="AI Engineer"; break;
-case "seni": profesi="Creative Director"; break;
-case "bisnis": profesi="Startup Founder"; break;
-case "kesehatan": profesi="Dokter Profesional"; break;
-case "pendidikan": profesi="Pendidik Inspiratif"; break;
-case "hukum": profesi="Pengacara Sukses"; break;
-case "gaming": profesi="Game Developer / Pro Player"; break;
-case "content": profesi="Content Creator Besar"; break;
-case "musik": profesi="Musisi Terkenal"; break;
-case "olahraga": profesi="Atlet Profesional"; break;
-case "psikologi": profesi="Psikolog Hebat"; break;
-case "pariwisata": profesi="Travel Expert"; break;
-default: profesi="individu sukses";
-}
+// PROFESI
+let profesi={
+teknologi:"AI Engineer",
+seni:"Creative Artist",
+bisnis:"Startup Founder",
+kesehatan:"Dokter",
+pendidikan:"Guru Inspiratif",
+hukum:"Pengacara",
+gaming:"Pro Player",
+content:"Content Creator",
+musik:"Musisi",
+olahraga:"Atlet",
+psikologi:"Psikolog",
+pariwisata:"Travel Expert"
+}[minat];
 
-// TEKS MOTIVASI PANJANG (FINAL BOSS)
-let hasil = `${nama}, berdasarkan analisis FutureMe AI...
+// MOTIVASI
+let hasil=`${nama}, masa depanmu sebagai ${profesi} sangat cerah.
 
-Kamu memiliki potensi kuat untuk menjadi seorang ${profesi} di masa depan.
+Kamu akan menghadapi tantangan, tapi setiap tantangan akan membuatmu lebih kuat.
 
-Perjalananmu tidak akan selalu mudah. Akan ada fase di mana kamu merasa ragu, lelah, bahkan ingin menyerah. Tapi justru di titik itulah kamu sedang berkembang.
+Di usia 20-an kamu belajar.
+Di usia 25 kamu mulai dikenal.
+Di usia 30 kamu sukses.
 
-Di usia 20-an, kamu mulai menemukan arah hidupmu. Kamu belajar dari kegagalan, memperbaiki diri, dan terus mencoba.
+Jangan berhenti berkembang. Masa depan dibangun dari hari ini.`;
 
-Di usia 25 tahun, kamu mulai dikenal karena kerja keras dan konsistensimu.
-
-Di usia 30 tahun, kamu tidak hanya sukses secara karier, tapi juga menjadi seseorang yang menginspirasi orang lain.
-
-Yang membuatmu berbeda bukan hanya bakatmu, tapi keberanianmu untuk terus maju saat orang lain berhenti.
-
-Ingat, masa depan cerah bukan sesuatu yang ditunggu — tapi sesuatu yang kamu bangun dari sekarang.
-
-Terus belajar. Terus berkembang. Dan jangan pernah meremehkan potensi dirimu sendiri.`;
-
-// RANDOM EXTRA MOTIVASI
-let extra=[
-"Setiap langkah kecil hari ini menentukan versi terbaik dirimu di masa depan.",
-"Kamu lebih dekat ke kesuksesan daripada yang kamu pikirkan.",
-"Percaya pada prosesmu, karena itu yang membentuk masa depanmu."
-];
-
-hasil+="\n\n"+extra[Math.floor(Math.random()*extra.length)];
-
-let keyword=minat+",success,future";
-
+// OUTPUT
 output.innerHTML=`
-<h2>✨ Future Simulation Result</h2>
+<h2>✨ Future Simulation</h2>
 <p id="text"></p>
-<img src="https://source.unsplash.com/400x250/?${keyword}">
+<div class="slideshow"><img id="img1"></div>
 `;
 
 typeEffect(hasil,"text");
 
-// suara
+// SLIDESHOW STABIL
+startSlideshow(minat);
+
+// SUARA
 let speech=new SpeechSynthesisUtterance(hasil);
 speech.lang="id-ID";
-speech.rate=0.95;
 speechSynthesis.speak(speech);
 
-// tampilkan presentasi
+// PRESENTASI
 showPresentation();
 }
 
+// TYPE
 function typeEffect(text,id){
 let i=0;
 let el=document.getElementById(id);
 el.innerHTML="";
-(function typing(){
+(function t(){
 if(i<text.length){
-el.innerHTML+=text.charAt(i);
-i++;
-setTimeout(typing,20);
+el.innerHTML+=text[i++];
+setTimeout(t,20);
 }
 })();
 }
 
+// SLIDESHOW FIXED
+function startSlideshow(key){
+let data={
+teknologi:[
+"https://images.unsplash.com/photo-1518770660439-4636190af475",
+"https://images.unsplash.com/photo-1550751827-4bd374c3f58b",
+"https://images.unsplash.com/photo-1526378722484-cc5c1c1a9b6f"
+],
+bisnis:[
+"https://images.unsplash.com/photo-1556740738-b6a63e27c4df",
+"https://images.unsplash.com/photo-1507679799987-c73779587ccf",
+"https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
+],
+default:[
+"https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+"https://images.unsplash.com/photo-1470770841072-f978cf4d019e",
+"https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d"
+]
+};
+
+let imgs=data[key]||data.default;
+let img=document.getElementById("img1");
+let i=0;
+
+function show(){
+img.style.opacity=0;
+setTimeout(()=>{
+img.src=imgs[i];
+img.style.opacity=1;
+i=(i+1)%imgs.length;
+},300);
+}
+show();
+setInterval(show,2500);
+}
+
+// DOWNLOAD
 function downloadResult(){
 let text=document.getElementById("text")?.innerText||"Belum ada hasil";
-let blob=new Blob([text],{type:"text/plain"});
+let blob=new Blob([text]);
 let a=document.createElement("a");
 a.href=URL.createObjectURL(blob);
-a.download="futureme.txt";
+a.download="future.txt";
 a.click();
 }
 
+// PRESENTASI
 function showPresentation(){
-let text=`FutureMe AI adalah platform berbasis kecerdasan buatan yang membantu pelajar memahami potensi masa depan mereka secara lebih mendalam.
-
-Dengan menggabungkan analisis minat, visualisasi, suara, dan pengalaman interaktif, pengguna dapat merasakan simulasi masa depan yang realistis dan memotivasi.
-
-Platform ini dirancang untuk mengurangi kebingungan pelajar dalam menentukan arah hidup serta membangun kepercayaan diri mereka dalam meraih masa depan yang lebih cerah.`;
+let text=`FutureMe AI membantu pelajar memahami masa depan mereka dengan cara interaktif dan memotivasi.`;
 
 let el=document.getElementById("presentasi");
 let target=document.getElementById("presentasiText");
-
 el.style.display="block";
-target.innerHTML="";
 
 let i=0;
-(function typing(){
+(function t(){
 if(i<text.length){
-target.innerHTML+=text.charAt(i);
-i++;
-setTimeout(typing,20);
+target.innerHTML+=text[i++];
+setTimeout(t,20);
 }
 })();
 }
