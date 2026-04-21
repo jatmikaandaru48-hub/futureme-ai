@@ -16,7 +16,6 @@ color:white;
 overflow-x:hidden;
 }
 
-/* PARTICLE */
 canvas{
 position:fixed;
 top:0;
@@ -24,11 +23,9 @@ left:0;
 z-index:-1;
 }
 
-/* HEADER */
 .header{text-align:center;padding:40px;}
 .header h1{font-size:42px;color:#38bdf8;}
 
-/* CONTAINER */
 .container{
 max-width:500px;
 margin:auto;
@@ -39,7 +36,6 @@ padding:25px;
 box-shadow:0 0 40px rgba(56,189,248,0.2);
 }
 
-/* INPUT */
 input,select{
 width:100%;
 padding:12px;
@@ -48,7 +44,6 @@ border-radius:10px;
 border:none;
 }
 
-/* BUTTON */
 button{
 width:100%;
 margin-top:15px;
@@ -60,7 +55,6 @@ cursor:pointer;
 background:linear-gradient(90deg,#38bdf8,#0ea5e9);
 }
 
-/* LOADING */
 #loadingBar{
 height:4px;
 width:0%;
@@ -69,7 +63,6 @@ margin-top:10px;
 transition:1.5s;
 }
 
-/* RESULT */
 .result{
 margin-top:20px;
 padding:20px;
@@ -78,7 +71,6 @@ border-radius:15px;
 display:none;
 }
 
-/* IMAGE */
 .slideshow img{
 width:100%;
 border-radius:12px;
@@ -87,7 +79,6 @@ opacity:0;
 transition:0.8s;
 }
 
-/* PRESENTASI */
 .presentasi{
 margin-top:20px;
 padding:20px;
@@ -143,14 +134,14 @@ display:none;
 </div>
 
 <script>
-// PARTICLE BACKGROUND
+// PARTICLE
 const canvas=document.getElementById("bg");
 const ctx=canvas.getContext("2d");
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 
 let particles=[];
-for(let i=0;i<70;i++){
+for(let i=0;i<80;i++){
 particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2});
 }
 
@@ -161,7 +152,7 @@ ctx.beginPath();
 ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
 ctx.fillStyle="#38bdf8";
 ctx.fill();
-p.y+=0.2;
+p.y+=0.3;
 if(p.y>canvas.height)p.y=0;
 });
 requestAnimationFrame(animate);
@@ -184,7 +175,6 @@ bar.style.width="100%";
 await new Promise(r=>setTimeout(r,2000));
 bar.style.width="0%";
 
-// PROFESI
 let profesi={
 teknologi:"AI Engineer",
 seni:"Creative Artist",
@@ -200,16 +190,17 @@ psikologi:"Psikolog",
 pariwisata:"Travel Expert"
 }[minat];
 
-// MOTIVASI
 let hasil=`${nama}, masa depanmu sebagai ${profesi} sangat cerah.
 
-Kamu akan menghadapi tantangan, tapi setiap tantangan akan membuatmu lebih kuat.
+Perjalananmu mungkin penuh tantangan, tapi setiap proses akan membentuk dirimu menjadi pribadi yang kuat.
 
-Di usia 20-an kamu belajar.
+Di usia 20-an kamu belajar dan berkembang.
 Di usia 25 kamu mulai dikenal.
-Di usia 30 kamu sukses.
+Di usia 30 kamu mencapai kesuksesan.
 
-Jangan berhenti berkembang. Masa depan dibangun dari hari ini.`;
+Kunci keberhasilanmu adalah konsistensi, keberanian, dan kepercayaan diri.
+
+Jangan pernah menyerah, karena masa depanmu sedang kamu bangun dari hari ini.`;
 
 // OUTPUT
 output.innerHTML=`
@@ -219,8 +210,6 @@ output.innerHTML=`
 `;
 
 typeEffect(hasil,"text");
-
-// SLIDESHOW STABIL
 startSlideshow(minat);
 
 // SUARA
@@ -232,7 +221,7 @@ speechSynthesis.speak(speech);
 showPresentation();
 }
 
-// TYPE
+// TYPE EFFECT
 function typeEffect(text,id){
 let i=0;
 let el=document.getElementById(id);
@@ -245,24 +234,43 @@ setTimeout(t,20);
 })();
 }
 
-// SLIDESHOW FIXED
+// SLIDESHOW SESUAI PROFESI
 function startSlideshow(key){
-let data={
-teknologi:[
-"https://images.unsplash.com/photo-1518770660439-4636190af475",
-"https://images.unsplash.com/photo-1550751827-4bd374c3f58b",
-"https://images.unsplash.com/photo-1526378722484-cc5c1c1a9b6f"
+
+let data = {
+
+teknologi: [
+"https://images.unsplash.com/photo-1515879218367-8466d910aaa4",
+"https://images.unsplash.com/photo-1555949963-aa79dcee981c",
+"https://images.unsplash.com/photo-1581090700227-4c4f50c0e8c4"
 ],
-bisnis:[
+
+bisnis: [
 "https://images.unsplash.com/photo-1556740738-b6a63e27c4df",
 "https://images.unsplash.com/photo-1507679799987-c73779587ccf",
 "https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
 ],
-default:[
-"https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+
+seni: [
+"https://images.unsplash.com/photo-1504198458649-3128b932f49b",
+"https://images.unsplash.com/photo-1529101091764-c3526daf38fe"
+],
+
+kesehatan: [
+"https://images.unsplash.com/photo-1580281657527-47c82f4b79f3",
+"https://images.unsplash.com/photo-1584515933487-779824d29309"
+],
+
+gaming: [
+"https://images.unsplash.com/photo-1511512578047-dfb367046420",
+"https://images.unsplash.com/photo-1587202372775-989c4b2b83b3"
+],
+
+default: [
 "https://images.unsplash.com/photo-1470770841072-f978cf4d019e",
 "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d"
 ]
+
 };
 
 let imgs=data[key]||data.default;
